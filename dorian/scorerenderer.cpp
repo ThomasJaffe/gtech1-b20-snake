@@ -3,11 +3,11 @@
 
 #include <string>
 
-ScoreGraphics::ScoreGraphics(){
+ScoreRenderer::ScoreRenderer(){
     renderer = NULL;
 }
 
-int ScoreGraphics::Init(SDL_Renderer* renderer, SDL_Rect drawZone){
+int ScoreRenderer::Init(SDL_Renderer* renderer, SDL_Rect drawZone){
     this->renderer = renderer;
     this->drawZone = drawZone;
 
@@ -20,11 +20,11 @@ int ScoreGraphics::Init(SDL_Renderer* renderer, SDL_Rect drawZone){
     return EXIT_SUCCESS;
 }
 
-ScoreGraphics::~ScoreGraphics(){
+ScoreRenderer::~ScoreRenderer(){
 
 }
 
-void ScoreGraphics::draw(Score* score){
+void ScoreRenderer::draw(Score* score){
     SDL_RenderSetViewport(renderer, &drawZone);
     SDL_SetRenderDrawColor(renderer, 65, 105, 225, 255);
     SDL_RenderFillRect(renderer, &drawZone);

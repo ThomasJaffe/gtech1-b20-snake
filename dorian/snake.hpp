@@ -49,6 +49,7 @@ class Snake{
 
     private:
         Segment* head;
+        Segment* tail;
 
 };
 

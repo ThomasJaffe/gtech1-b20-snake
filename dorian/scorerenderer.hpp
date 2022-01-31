@@ -7,10 +7,10 @@
 
 class Score;
 
-class ScoreGraphics{
+class ScoreRenderer{
     public:
-        ScoreGraphics();
-        ~ScoreGraphics();
+        ScoreRenderer();
+        ~ScoreRenderer();
 
         void draw(Score* score);
         int Init(SDL_Renderer* renderer, SDL_Rect drawZone);

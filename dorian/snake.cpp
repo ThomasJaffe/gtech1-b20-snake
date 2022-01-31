@@ -40,7 +40,7 @@ void Segment::SetDirection(Direction newDirection){
 Snake::Snake(int startingRow, int startingCol, Direction startingDirection, int length){
 
     Segment* segment = NULL;
-    for(int i=length-1;i>0;i--){
+    for(int i=length-1;i>0;i--){ // on part de la queue du serpent jusqu'au dernier segment avant la tête
         switch (startingDirection){
             case RIGHT:
                 segment = new Segment(startingRow, startingCol-i, startingDirection, segment);
@@ -55,14 +55,17 @@ Snake::Snake(int startingRow, int startingCol, Direction startingDirection, int 
                 segment = new Segment(startingRow+i, startingCol, startingDirection, segment);
                 break;
         }
+
+        if(i==length-1){ // si on est à la première itération, on est donc à la queue
+            tail = segment;
+        }
     }
 
     head = new Segment(startingRow, startingCol, startingDirection, segment);
 }
 
 Snake::~Snake(){
-    int i;
-    i+=1;
+
 }
 
 void Snake::ChangeDirection(Direction newDirection){
@@ -113,6 +116,7 @@ bool Snake::Move(Playground* playground){
 
     if (previousSegment != nullptr){
         previousSegment->SetNext(nullptr);
+        tail = previousSegment;
         delete actualSegment;
     }
 
@@ -157,7 +161,7 @@ void Snake::draw(MainSDLWindow* mainWindow, int tile_size){
         SDL_SetRenderDrawColor(mainWindowRenderer, 255, 255, 255, 255);
         SDL_RenderSetViewport(mainWindowRenderer, &playground);
         SDL_Rect rectToDraw = {actual_segment->GetCol()*tile_size, actual_segment->GetRow()*tile_size, tile_size, tile_size};
-        SDL_RenderDrawRect(mainWindowRenderer, &rectToDraw);
+        SDL_RenderFillRect(mainWindowRenderer, &rectToDraw);
         actual_segment = actual_segment->GetNext();
     }
 }
